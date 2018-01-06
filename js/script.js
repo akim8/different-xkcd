@@ -7,58 +7,113 @@ $.ajaxSetup({
 });
 
 window.onload = function (e) {
+	// Initialize buttons
+	document.getElementById('transcripttoggle').addEventListener('click', toggleTranscript);
+	document.getElementById('firstbtn').addEventListener('click', function() {
+		getXKCD(1);
+	});
+	document.getElementById('prevbtn').addEventListener('click', function() {
+		getXKCD(parseInt(document.getElementById('xkcdnumber').placeholder) - 1);
+	});
+	document.getElementById('randbtn').addEventListener('click', function() {
+		getXKCD(getRandomInt(1, document.getElementById('xkcdnumber').max));
+	});
+	document.getElementById('nextbtn').addEventListener('click', function() {
+		getXKCD(parseInt(document.getElementById('xkcdnumber').placeholder) + 1);
+	});
+	document.getElementById('lastbtn').addEventListener('click', function() {
+		getXKCD(document.getElementById('xkcdnumber').max);
+	});
+	document.getElementById('xkcdnumber').addEventListener('keypress', function (e) {
+		var key = e.which || e.keyCode;
+		if (key === 13) { // Enter key
+			getXKCD(parseInt(document.getElementById('xkcdnumber').value));
+		}
+	});
 	getXKCD();
 }
 
-function getXKCD(xkcdNum = "") {
-	// Reset all elements except for image and max number
-	document.getElementById('xkcdnews').innerHTML = "XKCD updates every Monday, Wednesday, and Friday.";
+function getXKCD(getNum = "") {
+	// Set title to loading
 	document.getElementById('xkcdlink').removeAttribute('href');
 	document.getElementById('xkcdtitle').innerHMTL = "Loading<span id=\"dot1\">.</span><span id=\"dot2\">.</span><span id=\"dot3\">.</span>";
-	document.getElementById('xkcddate').innerHTML = "N/A";
-	document.getElementById('xkcdalttext').innerHTML = "";
-	document.getElementById('xkcdtranscript').innerHTML = "N/A";
 
 	// Build URL
-	if (xkcdNum == "") {
+	if (getNum == "") {
 		var url = "https://cors-anywhere.herokuapp.com/https://xkcd.com/info.0.json";
 	}
-	else var url = "https://cors-anywhere.herokuapp.com/https://xkcd.com/" + xkcdNum + "/info.0.json";
+	else var url = "https://cors-anywhere.herokuapp.com/https://xkcd.com/" + getNum + "/info.0.json";
 
 	// Get data
-	$.getJSON(url, function(data) {
+	if (getNum == "" || (getNum <= document.getElementById('xkcdnumber').max && getNum > 0 && getNum != parseInt(document.getElementById('xkcdnumber').placeholder, 10))) {
+		$.getJSON(url, function(data) {
 
-		// Set max number
-		if (xkcdNum == "") {
-			document.getElementById('xkcdnumbermax').innerHTML = data.num;
-		}
+			// Set max number
+			if (getNum == "") {
+				document.getElementById('xkcdnumbermax').innerHTML = data.num;
+				document.getElementById('xkcdnumber').max = data.num;
+			}
 
-		// Create month list
-		var monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+			// Create month list
+			var monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-		// Create day superscript
-		switch (data.day) {
-			case 1:
-			var daySup = "st"
-			break;
-			case 2:
-			var daySup = "nd"
-			break;
-			case 3:
-			var daySup = "rd"
-			break;
-			default:
-			var daySup = "th"
-		}
+			// Create day superscript
+			switch (data.day) {
+				case 1:
+				var daySup = "st"
+				break;
+				case 2:
+				var daySup = "nd"
+				break;
+				case 3:
+				var daySup = "rd"
+				break;
+				default:
+				var daySup = "th"
+			}
 
-		// Set elements
-		if (data.news != "") document.getElementById('xkcdnews').innerHTML = data.news;
-		if (data.link != "") document.getElementById('xkcdlink').href = data.link;
-		document.getElementById('xkcdtitle').innerHTML = data.title;
-		document.getElementById('xkcddate').innerHTML = monthList[data.month - 1] + " " + data.day + "<sup>" + daySup + "</sup>, " + data.year;
-		document.getElementById('xkcdimage').src = data.img;
-		document.getElementById('xkcdalttext').innerHTML = data.alt;
-		document.getElementById('xkcdnumber').innerHTML = data.num;
-		if (data.transcript != "") document.getElementById('xkcdtranscript').innerHTML = data.transcript;
-	});
+			// Replace \n in transcript with break tags
+			var fixedTranscript = data.transcript;
+			while(fixedTranscript.search("\n") != -1) {
+				fixedTranscript = fixedTranscript.replace("\n", "<br>");
+			}
+
+			// Set elements
+			if (data.news != "") document.getElementById('xkcdnews').innerHTML = data.news;
+			if (data.link != "") document.getElementById('xkcdlink').href = data.link;
+			document.getElementById('xkcdtitle').innerHTML = data.title;
+			document.getElementById('xkcddate').innerHTML = monthList[data.month - 1] + " " + data.day + "<sup>" + daySup + "</sup>, " + data.year;
+			document.getElementById('xkcdimage').src = data.img;
+			document.getElementById('xkcdalttext').innerHTML = data.alt;
+			document.getElementById('xkcdnumber').placeholder = data.num;
+			document.getElementById('xkcdtranscript').innerHTML = fixedTranscript;
+			if (fixedTranscript != "") {
+
+				toggleTranscriptDropdown(true);
+			}
+			else {
+				toggleTranscriptDropdown(false);
+			}
+		});
+	}
+	else alert("Requested comic doesn't exists!");
+	document.getElementById('xkcdnumber').value = "";
+}
+
+function toggleTranscript(visible) {
+	document.getElementById('dropdownicon').classList.toggle('rotate90');
+	document.getElementById('xkcdtranscript').classList.toggle('transcriptcollapsed');
+}
+
+function toggleTranscriptDropdown(visible) {
+	if (visible) {
+		document.getElementById('transcripttoggle').style.display = "block";
+	}
+	else if (!visible) {
+		document.getElementById('transcripttoggle').style.display = "none";
+	}
+}
+
+function getRandomInt(min, max) { /* inclusive */
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }

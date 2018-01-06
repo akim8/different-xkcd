@@ -7,10 +7,11 @@ html, body {
 	padding: 0;
 	margin: 0;
 }
-a:link, a:visited {
+a:link, a:visited, a:link h2, a:visited h2 {
+	text-decoration: underline;
 	color: #fff;
 }
-a:active, a:hover {
+a:active, a:hover, a:active h2, a:hover h2 {
 	text-decoration: none;
 }
 hr {
@@ -29,30 +30,91 @@ p {
 .tmid { /* center block-level elements */
 	margin: 0px auto;
 }
+.button {
+	border: 2px solid #fff;
+	border-radius: 2px;
+	padding: 6px;
+	margin: 2px;
+	display: inline-block;
+	cursor: pointer;
+}
+.icon {
+	display: block; /* Remove space under image */
+}
 
 /* Content */
+.grey, .grey a {
+	color: #a2a2a2;
+}
 .content {
 	width: calc(100% - 40px);
 	max-width: 900px;
 	padding: 20px;
 }
+.dropdownicon {
+	display: inline-block;
+	bottom: 0;
+	-webkit-transition: transform .25s;
+	transition: transform .25s;
+}
+.rotate90 {
+	transform: rotate(90deg);
+}
+#xkcdtitle {
+	margin-bottom: 0;
+	display: inline-block;
+}
 #scrollimg {
 	background-color: #fff;
 	border: solid 5px #fff;
 	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+#xkcdalttext {
+	font-style: italic;
+}
+#transcripttoggle {
+	cursor: pointer;
+}
+.transcriptcollapsed {
+	display:none;
+}
+input[type=number] {
+	color: #fff;
+	font-family:'Roboto', sans-serif;
+	background-color: #000;
+	border: 1px solid #fff;
+	border-radius: 2px;
+	width: 50px;
+	padding: 2px;
+	margin: 2px;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	color: #a2a2a2;
+}
+::-moz-placeholder { /* Firefox 19+ */
+	color: #a2a2a2;
+}
+:-ms-input-placeholder { /* IE 10+ */
+	color: #a2a2a2;
+}
+:-moz-placeholder { /* Firefox 18- */
+	color: #a2a2a2;
 }
 
 /* Loading blinking dots */
 
-#dot1 {
-	-webkit-animation-name: dot1;
+#dot1, #dot2, #dot3 {
 	-webkit-animation-duration: 1s;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
-	animation-name: dot1;
 	animation-duration: 1s;
 	animation-iteration-count: infinite;
 	animation-timing-function: linear;
+}
+#dot1 {
+	-webkit-animation-name: dot1;
+	animation-name: dot1;
 }
 @-webkit-keyframes dot1 {
 	25% { opacity: 0; }
@@ -62,13 +124,7 @@ p {
 }
 #dot2 {
 	-webkit-animation-name: dot2;
-	-webkit-animation-duration: 1s;
-	-webkit-animation-iteration-count: infinite;
-	-webkit-animation-timing-function: linear;
 	animation-name: dot2;
-	animation-duration: 1s;
-	animation-iteration-count: infinite;
-	animation-timing-function: linear;
 }
 @-webkit-keyframes dot2 {
 	50% { opacity: 0; }
@@ -78,13 +134,7 @@ p {
 }
 #dot3 {
 	-webkit-animation-name: dot3;
-	-webkit-animation-duration: 1s;
-	-webkit-animation-iteration-count: infinite;
-	-webkit-animation-timing-function: linear;
 	animation-name: dot3;
-	animation-duration: 1s;
-	animation-iteration-count: infinite;
-	animation-timing-function: linear;
 }
 @-webkit-keyframes dot3 {
 	75% { opacity: 0; }

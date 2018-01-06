@@ -1,30 +1,42 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Different XKCD</title><link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-		<link rel="stylesheet" href="css/style.css">
-	</head>
-	<body>
-		<div class="content tmid">
-			<h1 class="center">Different <a href="https://xkcd.com">XKCD</a></h1>
-			<h4 id="xkcdnews">XKCD updates every Monday, Wednesday, and Friday.</h4>
-			<a id="xkcdlink">
-				<h2 id="xkcdtitle">Loading<span id="dot1">.</span><span id="dot2">.</span><span id="dot3">.</span></h2>
-			</a>
-			<h4>Posted <span id="xkcddate">N/A</span></h4>
-			<div id="scrollimg">
-				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" class="tmid" id="xkcdimage" style="display: block;">
-			</div>
-			<p id="xkcdalttext"></p>
-			<div class="center">
-				<p><span id="xkcdnumber">N/A</span> / <span id="xkcdnumbermax">N/A</span></p>
-			</div>
-			<p>Transcript: <span id="xkcdtranscript">N/A</span></p>
-			<hr>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Different xkcd</title><link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="content tmid">
+		<h1>Different <a href="https://xkcd.com">xkcd</a></h1>
+		<h4 class="grey" id="xkcdnews">XKCD updates every Monday, Wednesday, and Friday.</h4>
+		<a id="xkcdlink">
+			<h2 id="xkcdtitle">Loading<span id="dot1">.</span><span id="dot2">.</span><span id="dot3">.</span></h2>
+		</a>
+		<h4>Posted <span id="xkcddate">?</span></h4>
+		<div id="scrollimg">
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" class="tmid" id="xkcdimage" style="display: block;"> <!-- 1px transparent pixel placeholder lol -->
 		</div>
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-		<script src="js/script.js" charset="utf-8"></script>
-	</body>
+		<p class="grey" id="xkcdalttext"></p>
+		<div class="center">
+			<div class="button" id="firstbtn"><img src="https:icon.now.sh/first_page/32/ffffff" class="icon"></div>
+			<div class="button" id="prevbtn"><img src="https:icon.now.sh/chevron_left/32/ffffff" class="icon"></div>
+			<div class="button" id="randbtn"><img src="https:icon.now.sh/shuffle/32/ffffff" class="icon"></div>
+			<div class="button" id="nextbtn"><img src="https:icon.now.sh/chevron_right/32/ffffff" class="icon"></div>
+			<div class="button" id="lastbtn"><img src="https:icon.now.sh/last_page/32/ffffff" class="icon"></div>
+			<p>
+				<input id="xkcdnumber" type="number" min="1" max="99999" placeholder="?" autocomplete="off"></input> / <span id="xkcdnumbermax">?</span>
+			</p>
+		</div>
+		<p id="transcripttoggle">
+			<img src="https:icon.now.sh/triangleRight/12/ffffff" class="dropdownicon" id="dropdownicon">
+			&nbsp;Transcript
+		</p>
+		<p class="transcriptcollapsed" id="xkcdtranscript"></p>
+		<hr>
+		<p class="center"><a href="https://github.com/kim4a/different-xkcd">GitHub</a> &middot <a href="https://xkcd.com/license.html">License</a></p>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="js/script.js" charset="utf-8"></script>
+</body>
 </html>
