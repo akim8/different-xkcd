@@ -30,7 +30,12 @@ window.onload = function (e) {
 			getXKCD(parseInt(document.getElementById('xkcdnumber').value));
 		}
 	});
+
+	// Get latest comic
 	getXKCD();
+
+	// Get comic by number after hash in URL https://stackoverflow.com/questions/11662693/how-do-i-get-the-value-after-hash-from-a-url-using-jquery
+	if (window.location.hash.substr(1) != "") getXKCD(window.location.hash.substr(1));
 }
 
 function getXKCD(getNum = "") {
@@ -44,8 +49,9 @@ function getXKCD(getNum = "") {
 	}
 	else var url = "https://cors-anywhere.herokuapp.com/https://xkcd.com/" + getNum + "/info.0.json";
 
-	// Get data
+	// Test if comic exists
 	if (getNum == "" || (getNum <= document.getElementById('xkcdnumber').max && getNum > 0 && getNum != parseInt(document.getElementById('xkcdnumber').placeholder, 10))) {
+		// Get data
 		$.getJSON(url, function(data) {
 
 			// Set max number
@@ -100,7 +106,7 @@ function getXKCD(getNum = "") {
 	document.getElementById('xkcdnumber').value = "";
 }
 
-function toggleTranscript(visible) {
+function toggleTranscript() {
 	document.getElementById('dropdownicon').classList.toggle('rotate90');
 	document.getElementById('xkcdtranscript').classList.toggle('transcriptcollapsed');
 }
