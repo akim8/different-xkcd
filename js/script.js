@@ -45,9 +45,9 @@ function getXKCD(getNum = "") {
 
 	// Build URL
 	if (getNum == "") {
-		var url = "https://cors-anywhere.herokuapp.com/https://xkcd.com/info.0.json";
+		var url = "https://crossorigin.me/https://xkcd.com/info.0.json";
 	}
-	else var url = "https://cors-anywhere.herokuapp.com/https://xkcd.com/" + getNum + "/info.0.json";
+	else var url = "https://crossorigin.me/https://xkcd.com/" + getNum + "/info.0.json";
 
 	// Test if comic exists
 	if (getNum == "" || (getNum <= document.getElementById('xkcdnumber').max && getNum > 0 && getNum != parseInt(document.getElementById('xkcdnumber').placeholder, 10))) {
