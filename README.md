@@ -1,4 +1,4 @@
-# [Different xkcd](https://kim4a.github.io/different-xkcd)
+# [Different xkcd](https://akim8.github.io/different-xkcd)
 
 ### What is this?
 
@@ -14,7 +14,7 @@ The point of this isn't to be better, just different.
 
 ### How do I jump to a specific comic?
 
-Add a hash and the number of the comic you want to the URL. For instance, if I want to get xkcd 147, my url would be https://kim4a.github.io/different-xkcd#147.
+Add a hash and the number of the comic you want to the URL. For instance, if I want to get xkcd 147, my url would be https://akim8.github.io/different-xkcd#147.
 
 ***
 
