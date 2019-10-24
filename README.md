@@ -18,8 +18,6 @@ Add a hash and the number of the comic you want to the URL. For instance, if I w
 
 ***
 
-Thank you [cors-anywhere](https://cors-anywhere.herokuapp.com/)! You truly are marvelous.
+Uses [bypass-cors](https://github.com/Shivam010/bypass-cors) to get around CORS errors.
 
 Button icons are from [microicon](https://icon.now.sh).
-
-And as usual, thank you Stack Overflow.
